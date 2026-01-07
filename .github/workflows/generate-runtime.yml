@@ -28,7 +28,6 @@ jobs:
               while IFS=: read -r command desc; do
                 if [ -n "$command" ]; then
                   SAFE_COMMAND=${command// /_}
-                  # Replace placeholder with minimal executable version
                   echo "function $SAFE_COMMAND(...args) { console.log('Executing $command', args); }" >> "$RUNTIME_FILE"
                 fi
               done < "$LANG_FILE"
@@ -38,13 +37,19 @@ jobs:
             if [ -f "$SAMPLE_FILE" ]; then
               echo "// Execute sample code from $SAMPLE_FILE" >> "$RUNTIME_FILE"
               while IFS= read -r line; do
-                # Extract command and arguments
                 CMD=$(echo "$line" | awk '{print $1}')
                 ARGS=$(echo "$line" | cut -d' ' -f2-)
                 SAFE_CMD=${CMD// /_}
-                # Wrap args in quotes for JS strings
                 JS_ARGS=$(echo "$ARGS" | sed 's/\([^\ ]\+\)/"\1"/g')
                 echo "$SAFE_CMD($JS_ARGS);" >> "$RUNTIME_FILE"
               done < "$SAMPLE_FILE"
             fi
           done
+
+      - name: Commit and push generated runtimes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add hsx/Flows/runtimes/
+          git commit -m "Auto-generate runtime files" || echo "No changes to commit"
+          git push origin main
