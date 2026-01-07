@@ -1,10 +1,184 @@
-# SpookyLang Commands
-
-boo
-  Prints "👻 Boo!" to the console
-
-ghost NAME
-  Prints "👻 Ghost NAME has appeared!"
-
-say MESSAGE
-  Prints "👻 MESSAGE" to the console
+command boo -> print 👻 Boo!
+command ghost NAME -> print 👻 Ghost NAME has appeared
+command say MESSAGE -> print MESSAGE
+command clear -> screen clear
+command wait MS -> pause MS
+command play SOUND -> audio play SOUND
+command stop SOUND -> audio stop SOUND
+command set VAR VALUE -> memory[VAR]=VALUE
+command add VAR VALUE -> memory[VAR]+=VALUE
+command sub VAR VALUE -> memory[VAR]-=VALUE
+command mul VAR VALUE -> memory[VAR]*=VALUE
+command div VAR VALUE -> memory[VAR]/=VALUE
+command show VAR -> print memory[VAR]
+command input VAR -> memory[VAR]=user_input
+command if VAR == VALUE -> begin_if
+command if VAR != VALUE -> begin_if_not
+command if VAR > VALUE -> begin_if_gt
+command if VAR < VALUE -> begin_if_lt
+command else -> begin_else
+command end -> close_block
+command loop TIMES -> begin_loop
+command while VAR -> begin_while
+command break -> exit_loop
+command continue -> skip_loop
+command function NAME -> begin_func
+command call NAME -> run_func
+command return VALUE -> func_return VALUE
+command on event -> begin_event
+command emit event -> trigger_event
+command haunt -> enable_haunt_mode
+command unhaunt -> disable_haunt_mode
+command moon -> print moon_phase
+command spirit NAME -> summon_spirit NAME
+command banish NAME -> banish_spirit NAME
+command portal OPEN -> open_portal OPEN
+command portal CLOSE -> close_portal
+command write FILE TEXT -> file_write FILE TEXT
+command read FILE -> file_read FILE
+command time -> print system_time
+command date -> print system_date
+command random VAR MAX -> memory[VAR]=rand(MAX)
+command chance PERCENT -> chance_test PERCENT
+command fade in -> effect_fade_in
+command fade out -> effect_fade_out
+command shake -> effect_shake
+command glow -> effect_glow
+command thunder -> effect_thunder
+command fog -> effect_fog
+command rain -> effect_rain
+command snow -> effect_snow
+command lightning -> effect_lightning
+command heartbeat -> effect_heartbeat
+command scream -> effect_scream
+command whisper TEXT -> print whisper TEXT
+command echo TEXT -> print echo TEXT
+command curse NAME -> curse_entity NAME
+command bless NAME -> bless_entity NAME
+command protect NAME -> shield_entity NAME
+command damage NAME AMOUNT -> damage_entity NAME AMOUNT
+command heal NAME AMOUNT -> heal_entity NAME AMOUNT
+command spawn NAME -> spawn_entity NAME
+command destroy NAME -> destroy_entity NAME
+command move NAME X Y -> move_entity NAME X Y
+command rotate NAME ANGLE -> rotate_entity NAME ANGLE
+command scale NAME SIZE -> scale_entity NAME SIZE
+command color NAME COLOR -> color_entity NAME COLOR
+command opacity NAME VALUE -> opacity_entity NAME VALUE
+command visible NAME TRUEFALSE -> visible_entity NAME TRUEFALSE
+command log TEXT -> console_log TEXT
+command error TEXT -> console_error TEXT
+command debug TEXT -> console_debug TEXT
+command save SLOT -> save_state SLOT
+command load SLOT -> load_state SLOT
+command reset -> system_reset
+command exit -> system_exit
+command pause -> system_pause
+command resume -> system_resume
+command version -> print language_version
+command author -> print language_author
+command help -> print help_text
+command list commands -> print command_list
+command list memory -> print memory_dump
+command list entities -> print entity_list
+command list spirits -> print spirit_list
+command list events -> print event_list
+command define NAME VALUE -> constant_define NAME VALUE
+command undef NAME -> constant_remove NAME
+command compare A B -> print compare_result
+command clamp VAR MIN MAX -> clamp_value VAR MIN MAX
+command map VAR A B C D -> map_value VAR A B C D
+command lerp VAR A B T -> lerp_value VAR A B T
+command noise VAR -> noise_generate VAR
+command seed VALUE -> random_seed VALUE
+command fps -> print fps_counter
+command uptime -> print system_uptime
+command memory -> print memory_usage
+command cpu -> print cpu_usage
+command gpu -> print gpu_usage
+command device -> print device_info
+command platform -> print platform_info
+command fullscreen -> toggle_fullscreen
+command windowed -> exit_fullscreen
+command cursor hide -> hide_cursor
+command cursor show -> show_cursor
+command screenshot FILE -> capture_screen FILE
+command record start -> start_record
+command record stop -> stop_record
+command export FILE -> export_data FILE
+command import FILE -> import_data FILE
+command network connect ADDR -> net_connect ADDR
+command network send DATA -> net_send DATA
+command network receive VAR -> net_receive VAR
+command network close -> net_close
+command http get URL VAR -> http_get URL VAR
+command http post URL DATA -> http_post URL DATA
+command socket open ADDR -> socket_open ADDR
+command socket close -> socket_close
+command socket send DATA -> socket_send DATA
+command socket receive VAR -> socket_receive VAR
+command math sin VAR -> math_sin VAR
+command math cos VAR -> math_cos VAR
+command math tan VAR -> math_tan VAR
+command math sqrt VAR -> math_sqrt VAR
+command math pow A B -> math_pow A B
+command math abs VAR -> math_abs VAR
+command math floor VAR -> math_floor VAR
+command math ceil VAR -> math_ceil VAR
+command math round VAR -> math_round VAR
+command encrypt TEXT KEY -> encrypt_text TEXT KEY
+command decrypt TEXT KEY -> decrypt_text TEXT KEY
+command hash TEXT -> hash_text TEXT
+command verify HASH TEXT -> verify_hash HASH TEXT
+command compress FILE -> compress_file FILE
+command decompress FILE -> decompress_file FILE
+command pack DIR -> pack_directory DIR
+command unpack FILE -> unpack_file FILE
+command schedule TIME EVENT -> schedule_event TIME EVENT
+command cancel EVENT -> cancel_event EVENT
+command sleep MS -> system_sleep MS
+command wake -> system_wake
+command temperature -> print temperature
+command weather -> print weather
+command location -> print location
+command compass -> print compass_heading
+command gps -> print gps_coordinates
+command scan -> system_scan
+command detect -> system_detect
+command analyze -> system_analyze
+command diagnose -> system_diagnose
+command repair -> system_repair
+command optimize -> system_optimize
+command shutdown -> system_shutdown
+command reboot -> system_reboot
+command update -> system_update
+command install PKG -> install_package PKG
+command remove PKG -> remove_package PKG
+command upgrade PKG -> upgrade_package PKG
+command list packages -> list_packages
+command ping HOST -> ping_host HOST
+command trace HOST -> trace_route HOST
+command whoami -> print current_user
+command permissions -> print user_permissions
+command grant USER PERM -> grant_permission USER PERM
+command revoke USER PERM -> revoke_permission USER PERM
+command lock -> lock_system
+command unlock -> unlock_system
+command encrypt system -> encrypt_system
+command decrypt system -> decrypt_system
+command firewall on -> firewall_enable
+command firewall off -> firewall_disable
+command antivirus scan -> antivirus_scan
+command antivirus clean -> antivirus_clean
+command sandbox on -> sandbox_enable
+command sandbox off -> sandbox_disable
+command simulation start -> simulation_start
+command simulation stop -> simulation_stop
+command dream -> system_dream
+command nightmare -> system_nightmare
+command awaken -> system_awaken
+command prophecy -> system_prophecy
+command omen -> system_omen
+command fate -> system_fate
+command destiny -> system_destiny
+command endworld -> system_endworld
