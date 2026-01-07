@@ -18,17 +18,33 @@ jobs:
             [ -d "$DIR" ] || continue
             LANG_NAME=$(basename "$DIR")
             LANG_FILE="$DIR/language.txt"
+            SAMPLE_FILE=$(ls "$DIR"/*.language 2>/dev/null | head -n 1)
             RUNTIME_FILE="hsx/Flows/runtimes/${LANG_NAME}-runtime.js"
 
             echo "// Auto-generated runtime for $LANG_NAME" > "$RUNTIME_FILE"
 
-            # Generate JS functions for each command in language.txt
+            # Step 1: Generate real JS functions for commands
             if [ -f "$LANG_FILE" ]; then
               while IFS=: read -r command desc; do
                 if [ -n "$command" ]; then
                   SAFE_COMMAND=${command// /_}
-                  echo "function $SAFE_COMMAND() { console.log('Executing $command'); }" >> "$RUNTIME_FILE"
+                  # Replace placeholder with minimal executable version
+                  echo "function $SAFE_COMMAND(...args) { console.log('Executing $command', args); }" >> "$RUNTIME_FILE"
                 fi
               done < "$LANG_FILE"
+            fi
+
+            # Step 2: Execute sample code
+            if [ -f "$SAMPLE_FILE" ]; then
+              echo "// Execute sample code from $SAMPLE_FILE" >> "$RUNTIME_FILE"
+              while IFS= read -r line; do
+                # Extract command and arguments
+                CMD=$(echo "$line" | awk '{print $1}')
+                ARGS=$(echo "$line" | cut -d' ' -f2-)
+                SAFE_CMD=${CMD// /_}
+                # Wrap args in quotes for JS strings
+                JS_ARGS=$(echo "$ARGS" | sed 's/\([^\ ]\+\)/"\1"/g')
+                echo "$SAFE_CMD($JS_ARGS);" >> "$RUNTIME_FILE"
+              done < "$SAMPLE_FILE"
             fi
           done
