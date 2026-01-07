@@ -1,0 +1,5 @@
+name: SpookyLang
+author: You
+version: 0.1
+description: A tiny spooky language for ghosts 👻
+file_extension: SpookyLang
