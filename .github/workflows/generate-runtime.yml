@@ -40,22 +40,24 @@ jobs:
           done
 
       - name: Generate HTML if missing
+        shell: bash
         run: |
+          mkdir -p hsx/Flows/projects
           for DIR in hsx/Flows/projects/*; do
             HTML_FILE="$DIR/example.html"
             RUNTIME_FILE="../../runtimes/$(basename "$DIR")-runtime.js"
             if [ ! -f "$HTML_FILE" ]; then
-cat <<EOL > "$HTML_FILE"
+bash -c "cat > \"$HTML_FILE\" <<'EOL'
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Run $(basename "$DIR")</title>
+  <title>Run $(basename \"$DIR\")</title>
   <script src='$RUNTIME_FILE'></script>
 </head>
 <body>
-<h1>Run $(basename "$DIR")</h1>
+<h1>Run $(basename \"$DIR\")</h1>
 </body>
 </html>
-EOL
+EOL"
             fi
           done
