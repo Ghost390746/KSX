@@ -1,1 +1,10 @@
+# SpookyLang Commands
 
+boo
+  Prints "👻 Boo!" to the console
+
+ghost NAME
+  Prints "👻 Ghost NAME has appeared!"
+
+say MESSAGE
+  Prints "👻 MESSAGE" to the console
